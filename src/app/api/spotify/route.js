@@ -1,4 +1,4 @@
-const { NextResponse } = require("next/server");
+const { NextResponse, NextRequest } = require("next/server");
 const axios = require("axios")
 
 const FailedStatus = {
