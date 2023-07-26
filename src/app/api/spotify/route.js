@@ -7,13 +7,21 @@ const FailedStatus = {
 }
 
 const endpoint = 'https://sa.caliph.eu.org/api'
+const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    }
 
 export async function GET(request) {
     const params = param => request.nextUrl.searchParams.get(param)
     const query = params('query')
     const url = params('url')
 
-    if (!query&&!url) return NextResponse.json(FailedStatus, {status: 400, statusText: 'No query or url parameter'})
+    if (!query&&!url) return NextResponse.json(FailedStatus, { 
+        status: 400, 
+        statusText: 'No query or url parameter', 
+        headers: headers})
 
     async function getLyrics(id) {
         try {
@@ -43,21 +51,21 @@ export async function GET(request) {
     if (query) {
         try {
             const { data } = await axios.get(`${endpoint}/search/tracks?q=${query}`)
-            if (data < 1) return NextResponse.json({ status: false, message: 'Not found' }, { status: 404, statusText: 'Song not found' }) 
+            if (data < 1) return NextResponse.json({ status: false, message: 'Not found' }, { status: 404, statusText: 'Song not found', headers: headers }) 
             return NextResponse.json({
                 status: true,
                 message: 'success',
                 data
-            }, { status: 200 })
+            }, { status: 200, headers: headers })
         } catch (error) {
-            return NextResponse.json({ status: false, message: error.message}, { status: 500, statusText: error.message })
+            return NextResponse.json({ status: false, message: error.message}, { status: 500, statusText: error.message, headers: headers })
         }
     } else {
         try {
             const { data } = await axios.get(`${endpoint}/info/track?url=${url}`)
             const lyrics = await getLyrics(data.id)
             const meta = await getDownloadLink(data.id)
-            if (data < 1) return NextResponse.json({ status: false, message: 'Not found' }, { status: 404, statusText: 'Track not found' }) 
+            if (data < 1) return NextResponse.json({ status: false, message: 'Not found' }, { status: 404, statusText: 'Track not found', headers: headers }) 
             return NextResponse.json({
                 status: true,
                 message: 'success',
@@ -65,9 +73,9 @@ export async function GET(request) {
                 download: meta.link,
                 data,
                 lyrics,
-            }, { status: 200})
+            }, { status: 200,headers: headers })
         } catch (error) {
-            return NextResponse.json({ status: false, message: error.message}, { status: 500, statusText: error.message })
+            return NextResponse.json({ status: false, message: error.message}, { status: 500, statusText: error.message, headers: headers })
         }
     }
   }
