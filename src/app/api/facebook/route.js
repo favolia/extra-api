@@ -1,4 +1,4 @@
-import { fbdl } from "./function";
+import { fbdl } from "./functions";
 const { NextResponse } = require("next/server");
 
 const headers = {
