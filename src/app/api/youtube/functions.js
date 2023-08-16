@@ -16,22 +16,19 @@ export async function youtubedl(url) {
 
         const { data } = await axios.get(`${endpoint}${id}`)
         const $ = cheerio.load(data)
-        const ytdl = [
-            {
-              video: {
-                resolution: $('div.downloadbox > div.btn-group.btn-group-justified > a:first').text().trim() || null,
-                download: $('div.downloadbox > div.btn-group.btn-group-justified > a:first').attr('href') || null
-              },
-              video: {
-                resolution: $('div.downloadbox > div.btn-group.btn-group-justified > a:last').text().trim() || null,
-                download: $('div.downloadbox > div.btn-group.btn-group-justified > a:last').attr('href') || null
-              },
-            }
-          ]
 
         return {
             status: true,
-            data: ytdl
+            data: [
+              {
+                  resolution: $('div.downloadbox > div.btn-group.btn-group-justified > a:first').text().trim() || null,
+                  download: $('div.downloadbox > div.btn-group.btn-group-justified > a:first').attr('href') || null,
+              },
+              {
+                  resolution: $('div.downloadbox > div.btn-group.btn-group-justified > a:last').text().trim() || null,
+                  download: $('div.downloadbox > div.btn-group.btn-group-justified > a:last').attr('href') || null
+              }
+          ]
         }
     } catch (error) {
         return {
