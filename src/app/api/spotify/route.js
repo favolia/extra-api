@@ -1,5 +1,5 @@
 const { getDownloadLink, getLyrics } = require("./functions");
-const { NextResponse, NextRequest } = require("next/server");
+const { NextResponse } = require("next/server");
 const axios = require("axios")
 
 const FailedStatus = {
