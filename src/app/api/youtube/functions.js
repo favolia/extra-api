@@ -18,11 +18,11 @@ export async function youtubedl(url) {
         const $ = cheerio.load(data)
         const ytdl = [
             {
-              video1: {
+              video: {
                 resolution: $('div.downloadbox > div.btn-group.btn-group-justified > a:first').text().trim() || null,
                 download: $('div.downloadbox > div.btn-group.btn-group-justified > a:first').attr('href') || null
               },
-              video2: {
+              video: {
                 resolution: $('div.downloadbox > div.btn-group.btn-group-justified > a:last').text().trim() || null,
                 download: $('div.downloadbox > div.btn-group.btn-group-justified > a:last').attr('href') || null
               },
