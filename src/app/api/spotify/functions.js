@@ -39,7 +39,7 @@ export async function getDownloadLink(id) {
 export async function search(query) {
     try {
         const data = await spotify.search(query);
-        return data.tracks.items;
+        return data.tracks;
     } catch (error) {
         throw new Error(error.message)
     }
