@@ -38,8 +38,6 @@ export async function getDownloadLink(id) {
 }
 
 export async function search(query) {
-    if (isUrl(query)) throw new Error("Search function not support for url");
-    // const limits = limit ? limit : 1;
     const data = await spotify.search({ q: query, type: "track", limit: '50' });
     return data.tracks;
 }
