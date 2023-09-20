@@ -1,4 +1,11 @@
 const axios = require('axios')
+const spot = require("spotify-finder");
+const spotify = new spot({
+    consumer: {
+        key: "271f6e790fb943cdb34679a4adcc34cc",
+        secret: "c009525564304209b7d8b705c28fd294",
+    },
+});
 
 export async function getLyrics(id) {
     try {
@@ -28,6 +35,13 @@ export async function getDownloadLink(id) {
         throw new Error(error.message)
         // return { link: null, metadata: { cover: null } }
     }
+}
+
+export async function search(query) {
+    if (isUrl(query)) throw new Error("Search function not support for url");
+    const limits = limit ? limit : 1;
+    const data = await spotify.search({ q: query, type: "track", limit: '50' });
+    return data.tracks;
 }
 
 export function convertMs(duration) {

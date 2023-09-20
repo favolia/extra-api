@@ -1,14 +1,13 @@
-const { getDownloadLink, getLyrics, convertMs } = require("./functions");
+const { getDownloadLink, getLyrics, convertMs, search } = require("./functions");
 const { NextResponse } = require("next/server");
-const axios = require("axios")
-const { search } = require('@nechlophomeriaa/spotifydl')
+// const axios = require("axios")
 
 const FailedStatus = {
     status: false,
     message: 'No query, lyrics or url parameter',
 }
 
-const endpoint = 'https://api.arifzyn.biz.id'
+// const endpoint = 'https://api.arifzyn.biz.id'
 const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET',
