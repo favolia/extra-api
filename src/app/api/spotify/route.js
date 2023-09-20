@@ -1,7 +1,7 @@
 const { getDownloadLink, getLyrics, convertMs } = require("./functions");
 const { NextResponse } = require("next/server");
 const axios = require("axios")
-const { search, downloadTrack } = require('@nechlophomeriaa/spotifydl')
+const { search } = require('@nechlophomeriaa/spotifydl')
 
 const FailedStatus = {
     status: false,
