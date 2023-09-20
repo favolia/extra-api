@@ -16,12 +16,28 @@ export async function getDownloadLink(id) {
             headers: {
                 'Origin': 'https://spotifydown.com',
                 'Referer': 'https://spotifydown.com/',
-              }
+            }
         })
         console.log(data);
+        if (!data.success) {
+            throw new Error(data.message)
+        }
         return data
     } catch (error) {
         console.log(error);
-        return {link: null, metadata: {cover: null}}
+        throw new Error(error.message)
+        // return { link: null, metadata: { cover: null } }
     }
+}
+
+export function convertMs(duration) {
+    const seconds = Math.floor((duration / 1000) % 60);
+    const minutes = Math.floor((duration / (1000 * 60)) % 60);
+    const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    const formattedHours = (hours < 10) ? "0" + hours : hours;
+    const formattedMinutes = (minutes < 10) ? "0" + minutes : minutes;
+    const formattedSeconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nechlophomeriaa/spotifydl": "^0.0.10",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
