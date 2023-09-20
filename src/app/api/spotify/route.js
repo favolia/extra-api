@@ -28,7 +28,7 @@ export async function GET(request) {
 
     if (query) {
         try {
-            const { items } = await search(query, '50')
+            const { items } = await search(query)
             if (items < 1) return NextResponse.json({ status: false, message: 'Not found' }, { status: 404, statusText: 'Song not found', headers })
             const data = items.map((item, i) => {
                 return {

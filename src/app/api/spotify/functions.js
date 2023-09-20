@@ -1,11 +1,10 @@
 const axios = require('axios')
-const spot = require("spotify-finder");
-const spotify = new spot({
-    consumer: {
-        key: "271f6e790fb943cdb34679a4adcc34cc",
-        secret: "c009525564304209b7d8b705c28fd294",
-    },
-});
+const spotify = require("@ksolo/spotify-search");
+const token = {
+    key: "271f6e790fb943cdb34679a4adcc34cc",
+    secret: "c009525564304209b7d8b705c28fd294",
+}
+spotify.setCredentials(token.key, token.secret);
 
 export async function getLyrics(id) {
     try {
@@ -38,8 +37,12 @@ export async function getDownloadLink(id) {
 }
 
 export async function search(query) {
-    const data = await spotify.search({ q: query, type: "track", limit: '50' });
-    return data.tracks;
+    try {
+        const data = await spotify.search(q);
+        return data.tracks.items;
+    } catch (error) {
+        throw new Error(error.message)
+    }
 }
 
 export function convertMs(duration) {
