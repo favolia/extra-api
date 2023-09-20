@@ -7,7 +7,6 @@ const FailedStatus = {
     message: 'No query, lyrics or url parameter',
 }
 
-// const endpoint = 'https://api.arifzyn.biz.id'
 const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET',
