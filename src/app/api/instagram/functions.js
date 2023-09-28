@@ -16,7 +16,7 @@ async function instagramdl(url) {
     let result = { status: true, data: [] };
     const $ = cheerio.load(resp.data.data);
     $(".download-box > li > .download-items").each(function () {
-      result.data.push($(this).find(".download-items__btn > a").attr("href")
+      result.data.push($(this).find(".download-items__btn > a").attr("href"))
         })
     // console.log(result)
     return result;
