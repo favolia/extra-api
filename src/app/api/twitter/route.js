@@ -18,7 +18,7 @@ export async function GET(request) {
   if (!url)
     return NextResponse.json(errorMessage, {
       status: 400,
-      statusText: "No query/url parameter",
+      statusText: errorMessage.message,
       headers,
     });
   try {
