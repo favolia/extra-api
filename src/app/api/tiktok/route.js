@@ -1,4 +1,4 @@
-import { tiktokdl2 } from "./functions";
+import { tiktokdl } from "./functions";
 const { NextResponse } = require("next/server");
 
 const headers = {
@@ -22,7 +22,7 @@ export async function GET(request) {
     })
 
     try {
-        const result = await tiktokdl2(url)
+        const result = await tiktokdl(url)
         if (result.status) {
             return NextResponse.json(result, { status: 200, statusText: 'OK', headers })
         } else {
